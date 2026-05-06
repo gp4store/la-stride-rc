@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA Stride Run Club — Run the City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Archivo+Black&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="script/script.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <img src="img/logo.jpg" alt="LA Stride Run Club">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#runs">Runs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#ethos">Ethos</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+  
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg">
+    <img src="img/9.jpg" alt="">
+  </div>
+  <div class="hero-content">
+    <div class="hero-tagline"><span>EST. 2025 — LOS ANGELES, CA</span></div>
+    <div class="hero-logo">
+      <img src="img/logo.jpg" alt="LA Stride Run Club">
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-num">50+</div>
+        <div class="meta-label">Members</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">3x</div>
+        <div class="meta-label">Weekly Runs</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">12k</div>
+        <div class="meta-label">Miles Logged</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-text reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">A community<br>built on miles<br>and mornings.</h2>
+      <p>LA Stride started with a group of friends from CrossFit and weightlifting who decided to start running together and push each other outside the gym. What began as a simple group chat turned into a growing community built on movement, consistency, and good people.</p>
+      <div class="about-quote">"It's never about the pace. It's about who's beside you when the sun comes up over at Hermosa Beach pier."</div>
+      <p>Every runner welcome. Every distance counts. Bring water, bring stories, leave with both.</p>
+    </div>
+    <div class="about-visual reveal">
+      <img src="img/12.jpg" alt="LA Stride Run Club">
+    </div>
+  </div>
+</section>
+
+<!-- RUNS -->
+<section id="runs" class="runs">
+  <div class="runs-header reveal">
+    <div class="section-label">Weekly Schedule</div>
+    <h2 class="section-title">Pick your day.<br>We'll be there.</h2>
+  </div>
+  <!-- <div class="runs-grid">
+    <div class="run-card reveal">
+      <div class="run-day">Tuesday</div>
+      <div class="run-time">7:00 PM</div>
+      <div class="run-card-divider"></div>
+      <div class="run-name">Aviation Park</div>
+      <p class="run-detail">A relaxed track work session</p>
+      <div class="run-stats">
+        <span>you do you, do</span>
+        <span>EASY</span>
+      </div>
+    </div> -->
+    <!-- <div class="run-card reveal">
+      <div class="run-day">Thursday</div>
+      <div class="run-time">7:00 PM</div>
+      <div class="run-card-divider"></div>
+      <div class="run-name">Griffith Tempo</div>
+      <p class="run-detail">Hills, sweat, sunrise. The one that makes you feel something. Park Observatory finish.</p>
+      <div class="run-stats">
+        <span>5.5 MI</span>
+        <span>TEMPO</span>
+      </div>
+    </div> -->
+    <div class="run-card reveal">
+      <div class="run-day">Sunday</div>
+      <div class="run-time">7:00 AM</div>
+      <div class="run-card-divider"></div>
+      <div class="run-name">The Long One</div>
+      <p class="run-detail">Meeting at BOLT - 190 Hermosa avenue.</p>
+      <div class="run-stats">
+        <span>8–14 MI</span>
+        <span>LONG</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery">
+  <div class="gallery-header reveal">
+    <div class="gallery-header-text">
+      <div class="section-label">In the Wild</div>
+      <h2 class="section-title">Faces, places,<br>finish lines.</h2>
+    </div>
+    <div class="gallery-controls">
+      <button class="gallery-btn" id="galleryPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="gallery-pause" id="galleryPause" aria-label="Pause auto-scroll">
+        <svg id="galleryPauseIcon" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+      </button>
+      <button class="gallery-btn" id="galleryNext" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="gallery-track-wrap">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-item">
+        <span class="gallery-num">01</span>
+        <img src="img/1.jpg" alt="Group of runners">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">SuperBowl 10k</div>
+          <div class="gallery-caption-meta">Redondo Beach</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">02</span>
+        <img src="img/3.jpg" alt="Runner at sunrise">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Rose Bowl half and 5k</div>
+          <div class="gallery-caption-meta">PASADENA</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">03</span>
+        <img src="img/4.jpg" alt="Marathon runners">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Rose Bowl half and 5k</div>
+          <div class="gallery-caption-meta">PASADENA</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">04</span>
+        <img src="img/5.jpg" alt="Runner silhouette">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Rose Bowl half and 5k</div>
+          <div class="gallery-caption-meta">PASADENA</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">05</span>
+        <img src="img/6.jpg" alt="Group of runners on street">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">OC Half Marathon</div>
+          <div class="gallery-caption-meta">ORANGE COUNTY</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">06</span>
+        <img src="img/7.jpg" alt="Runner training">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Pack Mentality</div>
+          <div class="gallery-caption-meta">HERMOSA BEACH</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">07</span>
+        <img src="img/8.jpg" alt="Runners on track">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Made it out the group chat</div>
+          <div class="gallery-caption-meta">HERMOSA BEACH</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">08</span>
+        <img src="img/9.jpg" alt="Coffee after run">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">LA STRIDE RC</div>
+          <div class="gallery-caption-meta">HERMOSA BEACH</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETHOS -->
+<section id="ethos">
+  <div class="ethos">
+    <div class="section-label reveal" style="justify-content:center;">
+      Our Code
+    </div>
+    <h2 class="ethos-title reveal">Stronger Together,<br>One Stride At a Time.</h2>
+    <div class="ethos-grid">
+      <div class="ethos-item reveal">
+        <div class="ethos-num">I.</div>
+        <div class="ethos-name">SHOW UP</div>
+        <p class="ethos-text">Rain, fog, marine layer, hangover. The streets don't care. We meet anyway, and that's half the work.</p>
+      </div>
+      <div class="ethos-item reveal">
+        <div class="ethos-num">II.</div>
+        <div class="ethos-name">RUN HONEST</div>
+        <p class="ethos-text">No pace gatekeeping. No silent suffering. The fastest among us run the back. That's the rule.</p>
+      </div>
+      <div class="ethos-item reveal">
+        <div class="ethos-num">III.</div>
+        <div class="ethos-name">STAY AFTER</div>
+        <p class="ethos-text">The run ends. The club doesn't. Coffee, breakfast, weird conversations on the curb — that's the whole point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join" class="join">
+  <div class="join-content">
+    <div class="join-pre reveal">— FREE TO JOIN —</div>
+    <h2 class="join-title reveal">Lace up,<br>show up.</h2>
+    <p class="join-text reveal">No membership fees, no qualifying times, no shoe brand requirements. Bring whatever you've got and meet us at the start.</p>
+    
+    <a href="https://www.instagram.com/losangeles.stride/">
+    <button class="join-btn reveal">Join the Club</button>
+  </div>
+    </a>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <img src="assets/logo.jpg" alt="LA Stride Run Club">
+  </div>
+  <div class="footer-tag">RUN CLUB · LOS ANGELES</div>
+  <div class="footer-divider"></div>
+  <!-- <ul class="footer-links">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Strava</a></li>
+    <li><a href="#">Newsletter</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul> -->
+  <div class="copyright">© 2026 LA STRIDE RUN CLUB · MADE WITH SORE LEGS</div>
+</footer>
+
+
+</body>
+</html>

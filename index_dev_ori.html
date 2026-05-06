@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LA Stride Run Club — Run the City</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Archivo+Black&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2a4a;
+    --navy-deep: #0f1a30;
+    --navy-light: #2a3a5e;
+    --cream: #f5ecd0;
+    --cream-warm: #ede0bc;
+    --cream-dim: rgba(245, 236, 208, 0.6);
+    --rust: #c45a3a;
+    --gold: #d4a544;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(15, 26, 48, 0.95), rgba(15, 26, 48, 0.7));
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(245, 236, 208, 0.1);
+  }
+
+  .nav-brand {
+    height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-brand img {
+    height: 100%;
+    width: auto;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: var(--cream);
+    color: var(--navy);
+    padding: 0.7rem 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 3rem 4rem;
+  }
+
+  /* Blurred background photo */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero-bg img {
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    filter: blur(8px) saturate(0.7) brightness(0.55);
+    transform: scale(1.05);
+  }
+
+  /* Navy color tint overlay to keep brand cohesion */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(15, 26, 48, 0.4) 0%,
+        rgba(26, 42, 74, 0.65) 40%,
+        rgba(15, 26, 48, 0.85) 100%);
+    z-index: 1;
+  }
+
+  /* Decorative arched lines like a vintage poster */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140vmax;
+    height: 140vmax;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(245, 236, 208, 0.06);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vmax;
+    height: 100vmax;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(245, 236, 208, 0.04);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+  }
+
+  .hero-tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-tagline span {
+    display: inline-block;
+    margin: 0 1rem;
+  }
+
+  .hero-tagline::before, .hero-tagline::after {
+    content: '✦';
+    color: var(--cream-dim);
+    margin: 0 0.5rem;
+  }
+
+  .hero-logo {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 1rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.4s forwards;
+    filter: drop-shadow(0 10px 40px rgba(0,0,0,0.4));
+  }
+
+  .hero-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 4rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+
+  .meta-item {
+    text-align: center;
+  }
+
+  .meta-num {
+    font-family: 'Anton', sans-serif;
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .meta-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--cream-dim);
+    margin-top: 0.5rem;
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--cream-dim);
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards, bounce 2s 2s infinite;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 8rem 3rem;
+    position: relative;
+  }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    color: var(--cream);
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--cream-warm);
+    margin-bottom: 1.5rem;
+    max-width: 50ch;
+  }
+
+  .about-quote {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    border-left: 3px solid var(--gold);
+    padding: 0.5rem 0 0.5rem 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .about-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--navy-deep);
+    border: 1px solid rgba(245, 236, 208, 0.15);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-visual::before {
+    content: '';
+    position: absolute;
+    inset: 1rem;
+    border: 1px solid rgba(245, 236, 208, 0.2);
+    z-index: 1;
+  }
+
+  .about-visual img {
+    width: 80%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ===== RUNS / SCHEDULE ===== */
+  .runs {
+    background: var(--navy-deep);
+    border-top: 1px solid rgba(245, 236, 208, 0.1);
+    border-bottom: 1px solid rgba(245, 236, 208, 0.1);
+  }
+
+  .runs-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .runs-header .section-label {
+    justify-content: center;
+  }
+
+  .runs-header .section-label::after {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .runs-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .run-card {
+    background: var(--navy);
+    border: 1px solid rgba(245, 236, 208, 0.15);
+    padding: 2.5rem;
+    position: relative;
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+
+  .run-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+
+  .run-day {
+    font-family: 'Anton', sans-serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .run-time {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    color: var(--cream);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+
+  .run-card-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(245, 236, 208, 0.15);
+    margin: 1.5rem 0;
+  }
+
+  .run-name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .run-detail {
+    color: var(--cream-warm);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .run-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    font-size: 0.85rem;
+    color: var(--cream-dim);
+  }
+
+  .run-stats span::before {
+    content: '◆ ';
+    color: var(--gold);
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery {
+    padding: 8rem 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gallery-header {
+    padding: 0 3rem;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gallery-header-text { max-width: 600px; }
+
+  .gallery-controls {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .gallery-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 236, 208, 0.3);
+    background: transparent;
+    color: var(--cream);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+  }
+
+  .gallery-btn:hover {
+    background: var(--cream);
+    color: var(--navy);
+    border-color: var(--cream);
+    transform: translateY(-2px);
+  }
+
+  .gallery-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .gallery-pause {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 236, 208, 0.3);
+    background: transparent;
+    color: var(--cream);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .gallery-pause:hover {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+  }
+
+  .gallery-pause svg {
+    width: 14px;
+    height: 14px;
+    fill: currentColor;
+  }
+
+  .gallery-track-wrap {
+    position: relative;
+  }
+
+  /* Edge fade masks */
+  .gallery-track-wrap::before,
+  .gallery-track-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .gallery-track-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, var(--navy), transparent);
+  }
+  .gallery-track-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, var(--navy), transparent);
+  }
+
+  .gallery-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding: 1rem 3rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+  }
+
+  .gallery-track::-webkit-scrollbar { display: none; }
+
+  .gallery-item {
+    flex: 0 0 auto;
+    width: 380px;
+    height: 480px;
+    position: relative;
+    overflow: hidden;
+    background: var(--navy-deep);
+    border: 1px solid rgba(245, 236, 208, 0.1);
+  }
+
+  .gallery-item:nth-child(odd) {
+    transform: translateY(20px);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: saturate(0.85) contrast(1.05);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+    filter: saturate(1) contrast(1.1);
+  }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(15, 26, 48, 0.95), transparent);
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: var(--cream);
+  }
+
+  .gallery-caption-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .gallery-caption-meta {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    color: var(--gold);
+  }
+
+  .gallery-num {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.85rem;
+    color: var(--cream);
+    background: rgba(15, 26, 48, 0.7);
+    backdrop-filter: blur(4px);
+    padding: 0.4rem 0.7rem;
+    letter-spacing: 0.1em;
+    z-index: 2;
+  }
+
+  /* ===== ETHOS ===== */
+  .ethos {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .ethos-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    line-height: 0.95;
+    margin-bottom: 3rem;
+  }
+
+  .ethos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+
+  .ethos-item {
+    text-align: center;
+  }
+
+  .ethos-num {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .ethos-name {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.3em;
+    color: var(--cream);
+    font-size: 1.1rem;
+    margin: 1rem 0;
+  }
+
+  .ethos-text {
+    color: var(--cream-warm);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ===== JOIN CTA ===== */
+  .join {
+    background: var(--cream);
+    color: var(--navy);
+    text-align: center;
+    padding: 8rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .join::before, .join::after {
+    content: '';
+    position: absolute;
+    width: 80vmax;
+    height: 80vmax;
+    border: 1px solid rgba(26, 42, 74, 0.08);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .join::after {
+    width: 60vmax;
+    height: 60vmax;
+  }
+
+  .join-content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto;}
+
+  .join-pre {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.5em;
+    color: var(--rust);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .join-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(4.5rem, 12vw, 9rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    line-height: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .join-text {
+    font-size: 1.15rem;
+    color: var(--navy-light);
+    max-width: 50ch;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+
+  .join-btn {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 1.2rem 3.5rem;
+    border: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .join-btn:hover {
+    background: var(--rust);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(26, 42, 74, 0.3);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--navy-deep);
+    padding: 4rem 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(245, 236, 208, 0.1);
+  }
+
+  .footer-logo {
+    width: 180px;
+    margin: 0 auto;
+  }
+
+  .footer-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .footer-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  .footer-divider {
+    width: 80px;
+    height: 1px;
+    background: rgba(245, 236, 208, 0.2);
+    margin: 2rem auto;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links a {
+    color: var(--cream-dim);
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.2em;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .copyright {
+    color: var(--cream-dim);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-brand { height: 36px; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-meta { gap: 2rem; flex-wrap: wrap; }
+    .meta-num { font-size: 2.2rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .runs-grid { grid-template-columns: 1fr; }
+    .ethos-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-tagline { font-size: 0.75rem; letter-spacing: 0.3em;}
+    .footer-logo { width: 140px; }
+    .gallery { padding: 5rem 0; }
+    .gallery-header {
+      padding: 0 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+    .gallery-track { padding: 1rem 1.5rem; gap: 1rem; }
+    .gallery-item { width: 280px; height: 360px; }
+    .gallery-item:nth-child(odd) { transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <img src="assets/la-stride-logo.webp" alt="LA Stride Run Club">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#runs">Runs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#ethos">Ethos</a></li>
+    <li><a href="#join">Join</a></li>
+  </ul>
+  <button class="nav-cta">Sign Up</button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1486218119243-13883505764c?w=1920&q=80&auto=format&fit=crop" alt="">
+  </div>
+  <div class="hero-content">
+    <div class="hero-tagline"><span>EST. 2019 — LOS ANGELES, CA</span></div>
+    <div class="hero-logo">
+      <img src="assets/la-stride-logo.webp" alt="LA Stride Run Club">
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-num">340+</div>
+        <div class="meta-label">Members</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">3x</div>
+        <div class="meta-label">Weekly Runs</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-num">12k</div>
+        <div class="meta-label">Miles Logged</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-text reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">A community<br>built on miles<br>and mornings.</h2>
+      <p>LA Stride started with five friends, one beat-up speaker, and a Tuesday-night route through Echo Park. Six years later, we're still here — just bigger, faster, and a little bit louder.</p>
+      <div class="about-quote">"It's never about the pace. It's about who's beside you when the sun comes up over Griffith."</div>
+      <p>Every runner welcome. Every distance counts. Bring water, bring stories, leave with both.</p>
+    </div>
+    <div class="about-visual reveal">
+      <img src="assets/la-stride-logo.webp" alt="LA Stride Run Club">
+    </div>
+  </div>
+</section>
+
+<!-- RUNS -->
+<section id="runs" class="runs">
+  <div class="runs-header reveal">
+    <div class="section-label">Weekly Schedule</div>
+    <h2 class="section-title">Pick your morning.<br>We'll be there.</h2>
+  </div>
+  <div class="runs-grid">
+    <div class="run-card reveal">
+      <div class="run-day">Tuesday</div>
+      <div class="run-time">6:30 AM</div>
+      <div class="run-card-divider"></div>
+      <div class="run-name">Echo Park Loop</div>
+      <p class="run-detail">A relaxed shake-out around the lake. Coffee at Tribal after. All paces, no drop.</p>
+      <div class="run-stats">
+        <span>3.2 MI</span>
+        <span>EASY</span>
+      </div>
+    </div>
+    <div class="run-card reveal">
+      <div class="run-day">Thursday</div>
+      <div class="run-time">6:00 AM</div>
+      <div class="run-card-divider"></div>
+      <div class="run-name">Griffith Tempo</div>
+      <p class="run-detail">Hills, sweat, sunrise. The one that makes you feel something. Park Observatory finish.</p>
+      <div class="run-stats">
+        <span>5.5 MI</span>
+        <span>TEMPO</span>
+      </div>
+    </div>
+    <div class="run-card reveal">
+      <div class="run-day">Saturday</div>
+      <div class="run-time">7:00 AM</div>
+      <div class="run-card-divider"></div>
+      <div class="run-name">The Long One</div>
+      <p class="run-detail">Beach to bridge, downtown to the hills — route changes weekly. Pancakes mandatory.</p>
+      <div class="run-stats">
+        <span>8–14 MI</span>
+        <span>LONG</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery">
+  <div class="gallery-header reveal">
+    <div class="gallery-header-text">
+      <div class="section-label">In the Wild</div>
+      <h2 class="section-title">Faces, places,<br>finish lines.</h2>
+    </div>
+    <div class="gallery-controls">
+      <button class="gallery-btn" id="galleryPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="gallery-pause" id="galleryPause" aria-label="Pause auto-scroll">
+        <svg id="galleryPauseIcon" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+      </button>
+      <button class="gallery-btn" id="galleryNext" aria-label="Next">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="gallery-track-wrap">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-item">
+        <span class="gallery-num">01</span>
+        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800&q=80&auto=format&fit=crop" alt="Group of runners">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Tuesday Tempo</div>
+          <div class="gallery-caption-meta">ECHO PARK</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">02</span>
+        <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=800&q=80&auto=format&fit=crop" alt="Runner at sunrise">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">First Light</div>
+          <div class="gallery-caption-meta">GRIFFITH PARK</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">03</span>
+        <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&q=80&auto=format&fit=crop" alt="Marathon runners">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Race Day</div>
+          <div class="gallery-caption-meta">LA MARATHON</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">04</span>
+        <img src="https://images.unsplash.com/photo-1486218119243-13883505764c?w=800&q=80&auto=format&fit=crop" alt="Runner silhouette">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">The Long One</div>
+          <div class="gallery-caption-meta">SATURDAY · 14 MI</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">05</span>
+        <img src="https://images.unsplash.com/photo-1530137073265-9135cf3d5e6f?w=800&q=80&auto=format&fit=crop" alt="Group of runners on street">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Pack Mentality</div>
+          <div class="gallery-caption-meta">DOWNTOWN</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">06</span>
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80&auto=format&fit=crop" alt="Runner training">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Hill Repeats</div>
+          <div class="gallery-caption-meta">SILVER LAKE</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">07</span>
+        <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80&auto=format&fit=crop" alt="Runners on track">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Track Night</div>
+          <div class="gallery-caption-meta">USC OVAL</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <span class="gallery-num">08</span>
+        <img src="https://images.unsplash.com/photo-1517438476312-10d79c077509?w=800&q=80&auto=format&fit=crop" alt="Coffee after run">
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Post-Run Ritual</div>
+          <div class="gallery-caption-meta">TRIBAL CAFÉ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETHOS -->
+<section id="ethos">
+  <div class="ethos">
+    <div class="section-label reveal" style="justify-content:center;">
+      Our Code
+    </div>
+    <h2 class="ethos-title reveal">Stronger Together,<br>One Stride At a Time.</h2>
+    <div class="ethos-grid">
+      <div class="ethos-item reveal">
+        <div class="ethos-num">I.</div>
+        <div class="ethos-name">SHOW UP</div>
+        <p class="ethos-text">Rain, fog, marine layer, hangover. The streets don't care. We meet anyway, and that's half the work.</p>
+      </div>
+      <div class="ethos-item reveal">
+        <div class="ethos-num">II.</div>
+        <div class="ethos-name">RUN HONEST</div>
+        <p class="ethos-text">No pace gatekeeping. No silent suffering. The fastest among us run the back. That's the rule.</p>
+      </div>
+      <div class="ethos-item reveal">
+        <div class="ethos-num">III.</div>
+        <div class="ethos-name">STAY AFTER</div>
+        <p class="ethos-text">The run ends. The club doesn't. Coffee, breakfast, weird conversations on the curb — that's the whole point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN -->
+<section id="join" class="join">
+  <div class="join-content">
+    <div class="join-pre reveal">— FREE TO JOIN —</div>
+    <h2 class="join-title reveal">Lace up,<br>show up.</h2>
+    <p class="join-text reveal">No membership fees, no qualifying times, no shoe brand requirements. Bring whatever you've got and meet us at the start.</p>
+    <button class="join-btn reveal">Join the Club</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <img src="assets/la-stride-logo.webp" alt="LA Stride Run Club">
+  </div>
+  <div class="footer-tag">RUN CLUB · LOS ANGELES</div>
+  <div class="footer-divider"></div>
+  <ul class="footer-links">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Strava</a></li>
+    <li><a href="#">Newsletter</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="copyright">© 2026 LA STRIDE RUN CLUB · MADE WITH SORE LEGS</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Gallery: auto-scroll + manual controls
+  const track = document.getElementById('galleryTrack');
+  const prevBtn = document.getElementById('galleryPrev');
+  const nextBtn = document.getElementById('galleryNext');
+  const pauseBtn = document.getElementById('galleryPause');
+  const pauseIcon = document.getElementById('galleryPauseIcon');
+
+  if (track && prevBtn && nextBtn && pauseBtn) {
+    let isPaused = false;
+    let isHovering = false;
+    const SCROLL_SPEED = 1; // pixels per tick
+    const TICK_MS = 25;
+
+    const getCardWidth = () => {
+      const card = track.querySelector('.gallery-item');
+      if (!card) return 400;
+      const gap = parseFloat(getComputedStyle(track).gap) || 24;
+      return card.offsetWidth + gap;
+    };
+
+    const playIconSVG = '<polygon points="6 4 20 12 6 20 6 4" fill="currentColor"/>';
+    const pauseIconSVG = '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>';
+
+    const setPaused = (paused) => {
+      isPaused = paused;
+      pauseIcon.innerHTML = paused ? playIconSVG : pauseIconSVG;
+      pauseBtn.setAttribute('aria-label', paused ? 'Resume auto-scroll' : 'Pause auto-scroll');
+    };
+
+    pauseBtn.addEventListener('click', () => setPaused(!isPaused));
+
+    // Manual nav: pause auto-scroll and step one card
+    const manualScroll = (dir) => {
+      setPaused(true);
+      track.scrollBy({ left: dir * getCardWidth(), behavior: 'smooth' });
+    };
+
+    prevBtn.addEventListener('click', () => manualScroll(-1));
+    nextBtn.addEventListener('click', () => manualScroll(1));
+
+    // Pause on hover for readability
+    track.addEventListener('mouseenter', () => { isHovering = true; });
+    track.addEventListener('mouseleave', () => { isHovering = false; });
+
+    // Auto-scroll loop, with seamless wrap to start
+    setInterval(() => {
+      if (isPaused || isHovering) return;
+      if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 1) {
+        track.scrollTo({ left: 0, behavior: 'auto' });
+      } else {
+        track.scrollLeft += SCROLL_SPEED;
+      }
+    }, TICK_MS);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
